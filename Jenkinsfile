@@ -38,18 +38,7 @@ pipeline {
                }
            }
         }
-        stage ('QA Deploy')  {
-         echo "deploying to QA Env " 
-           deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.235.50.71:8080')], contextPath: null, war: '**/*.war'
-
-        }
-        stage ('QA Approve')  {
-           echo "Taking approval from QA manager"
-
-             timeout(time: 7, unit: 'DAYS') {
-             input message: 'Do you want to proceed to PROD?', submitter: 'mail4avitesh@gmail.com'
-              }
-        }
+        
         stage ('Staging Deployment'){
             steps {
                 build job: 'vprofile-deply-to-stage'
