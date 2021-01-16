@@ -38,7 +38,13 @@ pipeline {
                }
            }
         }
-      
+        stage ('QA Approve')  {
+           echo "Taking approval from QA manager"
+
+        timeout(time: 7, unit: 'DAYS') {
+        input message: 'Do you want to proceed to PROD?', submitter: 'mail4avitesh@gmail.com'
+            }
+       }
         stage ('Staging Deployment'){
             steps {
                 build job: 'vprofile-deply-to-stage'
