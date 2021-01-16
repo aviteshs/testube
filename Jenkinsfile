@@ -11,24 +11,20 @@ pipeline {
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
-        }
-
-			
+        }		
         stage ('Nexus Versioning'){
             steps {
-                Build job: 'vprofile-nexus-versoning'
-            }
-            
+                build job: 'vprofile-nexus-versoning'
+            }  
         }
 
         stage ('Staging Deployment'){
             steps {
-                Build job: 'vprofile-deply-to-stage'
+                build job: 'vprofile-deply-to-stage'
             }
             
         }
-        
-    }
+        }
 
 
 }
